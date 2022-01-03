@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #mainDiv{
+            display: flex;
+            width: 350px;
+            padding-left: 20px;
+            margin-left: 40%;
+            margin-top: 150px;
+            /* margin: auto; */
+            height: 300px;
+            border-radius:50px;
+            flex-direction: column;
+            background-color:greenyellow
+        }
+        h1{
+            margin-left: 50px;
+        }
+        #button,input{
+            height: 30px;
+            margin-top: 10px;
+            width: 300px;
+            border-radius: 20px;
+          }
+    </style>
+</head>
+<body>
+    <div id="mainDiv">
+        <h1>Delivery Address</h1>
+    <form  id="form">
+        <input id="name" type="text" placeholder="street name">
+        <input id="location" type="text" placeholder="Nearby location">
+        <input id = "number" type="text" placeholder=" conatact Number">
+       
+    </form>
+    <button id = "button" onclick="submit()"> Place Order</button>
+    </div>
+    
+</body>
+</html>
+<script>
+
+    function submit(){
+        event.preventDefault();
+        let sname = document.getElementById('name').value;
+        let location = document.getElementById('location').value;
+        let number = document.getElementById('number').value;
+        
+        alert("Your order is accepted");
+       let id = setTimeout(function(){
+            setTimeout(function(){
+                alert("Order delivered");
+            },12000)
+            setTimeout(function(){
+                alert("Order out for delivery");
+                
+            },10000)
+            setTimeout(function(){
+                alert("Your order is Ready");
+            },8000)
+            alert("Your order is being cooked");
+            // console.log("hello")
+        },3000);
+        // clearTimeout(id);
+    }
+</script>

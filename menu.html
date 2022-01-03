@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Document</title>
+    <style>
+        .container{
+            width: 100%;
+            height: 600px;
+            display:flex;
+            flex-wrap: wrap;
+        }
+        #innerdiv{
+            width: 500px;
+            margin-left: 100px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            margin-top: 20px;
+            height: 450px;
+            background-color: rgb(87, 187, 91);
+        }
+        img{
+            width: 500px;
+            height:300px;
+           }
+           p{
+               padding-left: 10px;
+               font-size: 30px;
+               line-height: 2px;
+               color: rgb(26, 97, 163)
+               font-weight: bold;
+           }
+            button{
+                margin-left: 600px;
+                border-radius:5px;
+                border: none;
+                width: 200px;
+                font-size: 20px;
+                height: 60px;
+                color: rgb(0, 0, 0);
+                background-color:rgb(81, 243, 0)
+            }
+           #icon{
+                width: 80px;
+                margin-left: 400px;
+                height:50px;
+            }
+    </style>
+</head>
+<body>
+    <!-- <input type="text" id="name" placeholder="Enter dish name"> -->
+    <button id="button" onclick="meal()">What we Serve <span>?</span></button>
+    <span id = "cart"> <img id="icon" onclick=window.open("checkout.html") src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png"> </span>
+    <div class="container"></div>
+</body>
+</html>
+<script>
+    async function meal(){
+        // let name = document.getElementById('name');
+        try{
+            let food = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
+            let randomFood = await food.json();
+            console.log('randomFood:', randomFood);
+            display(randomFood);
+        }
+        catch(error){
+            console.log('error:', error);
+        
+    }
+    let count=0;
+  function display(arr){
+      
+            let div = document.createElement('div');
+            div.setAttribute("onClick","addToCart()");
+            div.onClick="addToCart()";
+            div.setAttribute("id","innerdiv");
+            let img = document.createElement('img');
+            img.src = arr.meals[0].strMealThumb;
+            
+            let name = document.createElement('p');
+            name.innerHTML =`Dish Name: ${arr.meals[0].strMeal}`;
+
+            let cat = document.createElement('p');
+            cat.innerHTML =`Category: ${arr.meals[0].strCategory}`;
+
+            let id = document.createElement('p');
+            id.innerHTML = `Dish Id: ${arr.meals[0].idMeal}`;
+
+            let price = document.createElement('p');
+            price.innerHTML = `Price: ${Math.floor((Math.random()*(500-100)+100))}`;
+
+            div.append(img,id,name,cat,price);
+
+            document.querySelector('.container').append(div);
+            console.log(arr.meals[0].strMealThumb) ;
+     }
+        function addToCart(){
+         document.getElementById('innerdiv').addEventListener('onClick','addToCart')
+            count++;
+            let cart1 = document.createElement('h3');
+            cart1.innerHTML=count;
+            document.getElementById('cart').append(cart1);
+          }
+    }
+</script>
